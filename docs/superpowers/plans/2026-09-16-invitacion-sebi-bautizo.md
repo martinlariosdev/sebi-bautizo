@@ -18,7 +18,7 @@
 - Church Maps URL: `https://maps.app.goo.gl/YmkX9tMLW1qTpe8S7`
 - Reception Maps URL: `https://maps.app.goo.gl/Ks5CrTZNgYBN41hj6`
 - WhatsApp number: `50557253871` (already in `wa.me`-compatible international format, no `+`, no spaces).
-- WhatsApp prefilled message (verbatim): `Hola soy {Tu_Nombre_Y_Acompañante} y ¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨` — the `{Tu_Nombre_Y_Acompañante}` placeholder is intentional; encode with `encodeURIComponent`, never hand-encode (spec §6).
+- WhatsApp prefilled message (verbatim): `Hola soy {Tu_Nombre_Y_Acompañante}\n\n¡Sí, estaré presente! 💙. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨` — the `{Tu_Nombre_Y_Acompañante}` placeholder is intentional; encode with `encodeURIComponent`, never hand-encode (spec §6).
 - All 3 links use `target="_blank" rel="noopener noreferrer"` (spec §6, §15 of the original plan).
 - Flyer source asset is `assets/flyer_2x.png` (779×2019px), converted to `public/flyer.webp` — the original 1x jpeg is not used (spec §9).
 - QR generation script lives at `scripts/generate-qr.mjs` and is committed; the PNG it produces is a disposable output, never committed (spec §10).
@@ -143,7 +143,7 @@ describe("eventLinks", () => {
     const url = new URL(eventLinks.whatsappConfirm);
     const text = url.searchParams.get("text");
     expect(text).toBe(
-      "Hola soy {Tu_Nombre_Y_Acompañante} y ¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨"
+      "Hola soy {Tu_Nombre_Y_Acompañante}\n\n¡Sí, estaré presente! 💙. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨"
     );
   });
 });
@@ -159,7 +159,7 @@ Expected: FAIL — `Cannot find module './links'` (or similar), because `lib/lin
 ```ts
 const WHATSAPP_NUMBER = "50557253871";
 const WHATSAPP_MESSAGE =
-  "Hola soy {Tu_Nombre_Y_Acompañante} y ¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨";
+  "Hola soy {Tu_Nombre_Y_Acompañante}\n\n¡Sí, estaré presente! 💙. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨";
 
 export const eventLinks = {
   churchMaps: "https://maps.app.goo.gl/YmkX9tMLW1qTpe8S7",

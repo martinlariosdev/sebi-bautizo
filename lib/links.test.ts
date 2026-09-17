@@ -18,7 +18,7 @@ describe("eventLinks", () => {
     const url = new URL(eventLinks.whatsappConfirm);
     const text = url.searchParams.get("text");
     expect(text).toBe(
-      "Hola soy {Tu_Nombre_Y_Acompañante} y ¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨"
+      "Hola soy {Tu_Nombre_Y_Acompañante}\n\n¡Sí, estaré presente! 💙. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨"
     );
   });
 });
