@@ -65,7 +65,7 @@ sebi-bautizo/
 ```ts
 const WHATSAPP_NUMBER = "50557253871";
 const WHATSAPP_MESSAGE =
-  "¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨";
+  "Hola soy {Tu_Nombre_Y_Acompañante} y ¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨";
 
 export const eventLinks = {
   churchMaps: "https://maps.app.goo.gl/YmkX9tMLW1qTpe8S7",
@@ -75,6 +75,8 @@ export const eventLinks = {
 ```
 
 El mensaje se codifica en runtime con `encodeURIComponent`, no se hardcodea ya codificado, para evitar errores manuales con los emojis/acentos.
+
+El placeholder `{Tu_Nombre_Y_Acompañante}` es intencional: `wa.me` solo permite prellenar texto estático, no puede inyectar el nombre del invitado dinámicamente. El invitado ve el mensaje ya cargado en WhatsApp y reemplaza el placeholder por su nombre antes de enviarlo.
 
 Comportamiento:
 - Maps (iglesia y recepción): `target="_blank" rel="noopener noreferrer"`.
