@@ -41,17 +41,19 @@ sebi-bautizo/
 ├── lib/
 │   └── links.ts          # config centralizada: URLs de maps + whatsapp
 ├── public/
-│   └── flyer.webp        # flyer convertido desde el jpeg original
+│   └── flyer.webp        # flyer convertido desde assets/flyer_2x.png
 ├── scripts/
 │   └── generate-qr.mjs   # genera el PNG del QR a partir de la URL de producción
+├── assets/
+│   └── flyer_2x.png      # fuente original de mayor resolución (779×2019), no servida directamente
 └── docs/
     └── superpowers/specs/  # este documento
 ```
 
 ## 5. Componente `EventFlyer`
 
-- Contenedor `relative w-full max-w-[618px] mx-auto` que preserva el aspect ratio original (~618×1600).
-- `next/image` con `width={618} height={1600}` fijos (no `fill`) y `className="block w-full h-auto"` — evita layout shift y coincide con el aspect ratio real de la imagen. `fill` queda descartado por añadir complejidad (requiere `aspect-ratio` propio en el contenedor) sin ningún beneficio aquí.
+- Contenedor `relative w-full max-w-[618px] mx-auto` — el ancho máximo de despliegue se mantiene en 618px aunque la imagen fuente sea de mayor resolución (779×2019); es solo densidad de píxeles extra para pantallas retina.
+- `next/image` con `width={779} height={2019}` fijos (dimensiones intrínsecas reales del archivo, no `fill`) y `className="block w-full h-auto"` — el navegador escala hacia abajo al ancho del contenedor, evita layout shift y coincide con el aspect ratio real de la imagen. `fill` queda descartado por añadir complejidad (requiere `aspect-ratio` propio en el contenedor) sin ningún beneficio aquí.
 - 3 elementos `<a>` absolutos posicionados en **porcentajes** (no píxeles), para que se mantengan alineados con los botones del flyer en cualquier tamaño de pantalla.
 - Cada `<a>` lleva `aria-label` descriptivo y feedback visual sutil (`hover:bg-white/10`, `active:bg-white/20`).
 - Las coordenadas exactas de cada hotspot se miden sobre la imagen final y se validan visualmente en desktop y mobile durante implementación (no se fijan en este spec).
@@ -62,8 +64,8 @@ sebi-bautizo/
 
 ```ts
 export const eventLinks = {
-  churchMaps: "...",      // pendiente: URL de Google Maps de Parroquia San Antonio
-  receptionMaps: "...",   // pendiente: URL de Google Maps de la recepción
+  churchMaps: "https://maps.app.goo.gl/YmkX9tMLW1qTpe8S7",
+  receptionMaps: "https://maps.app.goo.gl/Ks5CrTZNgYBN41hj6",
   whatsappConfirm: "...", // pendiente: https://wa.me/<numero>?text=<mensaje>
 };
 ```
@@ -101,7 +103,7 @@ Estas tres URLs son el único dato externo bloqueante para completar la implemen
 
 ## 9. Performance y SEO
 
-- **Resolución del flyer:** el `.jpeg` original mide exactamente **618×1600px (1x)** — no es apto para pantallas retina tal cual. Antes de convertir a WebP, pedir al diseñador una versión a 2x (~1236×3200px) si existe; si no existe, se sube a 1x como limitación conocida y documentada, no como un descuido.
+- **Resolución del flyer:** el `.jpeg` original medía 618×1600px (1x). El usuario proporcionó `flyer_2x.png` a **779×2019px** (~1.26x, no un 2x completo, pero se usa como fuente por ser la mejor disponible) — se usa como fuente para la conversión a WebP en lugar del original.
 - Flyer convertido a `.webp` antes de subirlo a `public/`.
 - `next/image` con `priority` (contenido crítico visible).
 - Metadata básica en `layout.tsx`: título, descripción, Open Graph image (el propio flyer), favicon — importante porque el link se compartirá por WhatsApp.
@@ -123,11 +125,13 @@ Estas tres URLs son el único dato externo bloqueante para completar la implemen
 ## 12. Pendientes antes de implementar
 
 Bloqueantes (el usuario los proporcionará):
-- URL de Google Maps — Parroquia San Antonio.
-- URL de Google Maps — Casa club Residencial Camino verde.
+- ~~URL de Google Maps — Parroquia San Antonio.~~ ✅ Resuelto.
+- ~~URL de Google Maps — Casa club Residencial Camino verde.~~ ✅ Resuelto.
 - Número de WhatsApp para el enlace `wa.me` (formato internacional, ver sección 6).
 - (Opcional) texto del mensaje prellenado de WhatsApp.
-- (Opcional) versión 2x del flyer si existe, para pantallas retina.
+
+Resuelto:
+- ~~Versión 2x del flyer~~ ✅ Proporcionada (`flyer_2x.png`, 779×2019px).
 
 No bloqueantes (se resuelven durante implementación):
 - Coordenadas exactas (%) de los 3 hotspots sobre el flyer.
