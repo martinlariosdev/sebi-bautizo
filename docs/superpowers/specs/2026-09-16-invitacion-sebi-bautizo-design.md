@@ -63,12 +63,18 @@ sebi-bautizo/
 `lib/links.ts` centraliza los 3 destinos:
 
 ```ts
+const WHATSAPP_NUMBER = "50557253871";
+const WHATSAPP_MESSAGE =
+  "¡Sí, estaré presente! 🩵. Será un placer acompañarlos y compartir con ustedes ese día tan especial. 🕊️✨";
+
 export const eventLinks = {
   churchMaps: "https://maps.app.goo.gl/YmkX9tMLW1qTpe8S7",
   receptionMaps: "https://maps.app.goo.gl/Ks5CrTZNgYBN41hj6",
-  whatsappConfirm: "...", // pendiente: https://wa.me/<numero>?text=<mensaje>
+  whatsappConfirm: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`,
 };
 ```
+
+El mensaje se codifica en runtime con `encodeURIComponent`, no se hardcodea ya codificado, para evitar errores manuales con los emojis/acentos.
 
 Comportamiento:
 - Maps (iglesia y recepción): `target="_blank" rel="noopener noreferrer"`.
@@ -124,15 +130,14 @@ Estas tres URLs son el único dato externo bloqueante para completar la implemen
 
 ## 12. Pendientes antes de implementar
 
-Bloqueantes (el usuario los proporcionará):
-- ~~URL de Google Maps — Parroquia San Antonio.~~ ✅ Resuelto.
-- ~~URL de Google Maps — Casa club Residencial Camino verde.~~ ✅ Resuelto.
-- Número de WhatsApp para el enlace `wa.me` (formato internacional, ver sección 6).
-- (Opcional) texto del mensaje prellenado de WhatsApp.
-
-Resuelto:
-- ~~Versión 2x del flyer~~ ✅ Proporcionada (`flyer_2x.png`, 779×2019px).
+Todos los bloqueantes están resueltos:
+- ✅ URL de Google Maps — Parroquia San Antonio.
+- ✅ URL de Google Maps — Casa club Residencial Camino verde.
+- ✅ Número de WhatsApp (`50557253871`) y mensaje prellenado.
+- ✅ Flyer 2x (`flyer_2x.png`, 779×2019px) proporcionado como fuente.
 
 No bloqueantes (se resuelven durante implementación):
 - Coordenadas exactas (%) de los 3 hotspots sobre el flyer.
 - Conversión del flyer a WebP.
+
+Spec completo — listo para pasar a plan de implementación.
