@@ -289,7 +289,7 @@ export function EventFlyer() {
         alt="Invitación al bautizo y cumpleaños de Sebastián León. Sábado 5 de diciembre de 2026. Ceremonia religiosa en Parroquia San Antonio a las 3:00 pm. Recepción en Casa club Residencial Camino verde. Dress code: cóctel jardín, evitar blanco."
         width={779}
         height={2019}
-        priority
+        preload
         className="block w-full h-auto"
       />
       {hotspots.map((hotspot) => (

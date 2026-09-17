@@ -113,7 +113,7 @@ Estas tres URLs son el único dato externo bloqueante para completar la implemen
 
 - **Resolución del flyer:** el `.jpeg` original medía 618×1600px (1x). El usuario proporcionó `flyer_2x.png` a **779×2019px** (~1.26x, no un 2x completo, pero se usa como fuente por ser la mejor disponible) — se usa como fuente para la conversión a WebP en lugar del original.
 - Flyer convertido a `.webp` antes de subirlo a `public/`.
-- `next/image` con `priority` (contenido crítico visible).
+- `next/image` con `preload` (contenido crítico visible; `priority` está deprecado desde Next.js 16 en favor de `preload`).
 - Metadata básica en `layout.tsx`: título, descripción, Open Graph image (el propio flyer), favicon — importante porque el link se compartirá por WhatsApp.
 
 ## 10. Deploy y QR
