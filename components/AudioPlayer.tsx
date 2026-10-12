@@ -171,7 +171,7 @@ export function AudioPlayer() {
       />
       <span
         data-testid="time-display"
-        className="pointer-events-none absolute flex items-center justify-end font-serif text-[2.6vw] text-[#8a7a5c] sm:text-base"
+        className="pointer-events-none absolute flex items-center justify-center font-serif text-[2.6vw] text-[#8a7a5c] sm:text-base"
         style={TIME_ROW_POSITION}
       >
         {formatClockTime(clipTime)} | {formatClockTime(clipDuration)}
