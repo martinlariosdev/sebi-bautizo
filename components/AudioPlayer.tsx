@@ -6,6 +6,10 @@ const AUDIO_SRC = "/latido.m4a";
 const START_OFFSET_SECONDS = 9;
 const LABEL_BASE = "audio: el latido que cambió nuestras vidas";
 
+// Positions measured by sampling the flyer image's pixels (see docs/superpowers).
+const WAVEFORM_LEFT_PCT = 37.6;
+const WAVEFORM_WIDTH_PCT = 31.9;
+
 export function AudioPlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -74,7 +78,7 @@ export function AudioPlayer() {
         aria-label={`${isPlaying ? "Pausar" : "Reproducir"} ${LABEL_BASE}`}
         aria-pressed={isPlaying}
         className="absolute rounded-full"
-        style={{ top: "47.9%", left: "28.9%", width: "6.9%", height: "2.9%" }}
+        style={{ top: "44.1%", left: "27.2%", width: "7.0%", height: "2.4%" }}
       >
         {isPlaying && (
           <span
@@ -95,14 +99,14 @@ export function AudioPlayer() {
         onChange={handleSeek}
         aria-label={`Progreso del ${LABEL_BASE}`}
         className="absolute cursor-pointer opacity-0"
-        style={{ top: "47.6%", left: "37.9%", width: "46.8%", height: "3.5%" }}
+        style={{ top: "45.9%", left: "36.7%", width: "36.8%", height: "2.5%" }}
       />
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute h-[1.4%] w-[1.4%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2c4f6e]"
+        className="pointer-events-none absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#2c4f6e]"
         style={{
-          top: "49.3%",
-          left: `calc(37.9% + ${progressFraction * 46.8}%)`,
+          top: "45.35%",
+          left: `calc(${WAVEFORM_LEFT_PCT}% + ${progressFraction * WAVEFORM_WIDTH_PCT}%)`,
         }}
       />
     </>
